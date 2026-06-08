@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-python -m src.main "$@"
+#!/bin/bash
+pip install -r requirements.txt
+python src/main.py
