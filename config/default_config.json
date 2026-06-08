@@ -1,0 +1,55 @@
+{
+  "data": {
+    "db_path": "data/delivery.db",
+    "delivery_table": "deliveries",
+    "feedback_table": "feedback"
+  },
+  "task": {
+    "type": "classification",
+    "target": "low_rating",
+    "low_rating_threshold": 3
+  },
+  "features": {
+    "numeric": [
+      "distance_km",
+      "parcel_weight_kg",
+      "parcel_value_sgd",
+      "num_stops_on_route",
+      "driver_experience_months",
+      "pickup_wait_hours",
+      "actual_delivery_hours",
+      "promised_delivery_hours",
+      "lateness_hours"
+    ],
+    "categorical": [
+      "branch_clean",
+      "parcel_category_clean",
+      "delivery_priority_clean",
+      "vehicle_type_clean",
+      "payment_method_clean",
+      "booking_day_name"
+    ]
+  },
+  "split": {
+    "test_size": 0.2,
+    "random_state": 42
+  },
+  "model": {
+    "name": "logistic_regression",
+    "params": {
+      "learning_rate": 0.05,
+      "epochs": 500,
+      "l2": 0.01
+    },
+    "tuning": {
+      "enabled": true,
+      "learning_rate": [0.03, 0.05],
+      "l2": [0.001, 0.01, 0.1],
+      "epochs": [350]
+    }
+  },
+  "outputs": {
+    "dir": "outputs/ml",
+    "save_predictions": true
+  }
+}

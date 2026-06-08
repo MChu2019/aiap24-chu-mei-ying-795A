@@ -1,0 +1,736 @@
+{
+  "olist": {
+    "path": "C:\\Users\\mychu\\Documents\\Codex\\2026-05-29\\olist-ecommerce-project\\presentation\\olist_ecommerce_executive_deck.pptx",
+    "slide_count": 8,
+    "media_count": 0,
+    "slides": [
+      {
+        "slide": 1,
+        "text": [
+          "Olist E-Commerce Data Pipeline",
+          "Turning marketplace transactions into trusted executive metrics, reusable analytics models, and repeatable decisions.",
+          "9+",
+          "source datasets ingested into DuckDB",
+          "4",
+          "core dimensions for fast BI queries",
+          "6+",
+          "quality gates before analysis",
+          "Daily",
+          "scheduled ELT and data-quality run",
+          "Audience: CEO, CMO, CFO, CTO, VP Engineering"
+        ]
+      },
+      {
+        "slide": 2,
+        "text": [
+          "EXECUTIVE SUMMARY",
+          "The project creates one trusted path from raw order files to board-ready growth metrics.",
+          "Business value",
+          "A repeatable pipeline makes revenue trends, category performance, and customer value visible without manual spreadsheet work.",
+          "Technical value",
+          "DuckDB, dbt, and Dagster separate storage, transformation, quality, and orchestration into maintainable layers.",
+          "Decision value",
+          "Executives get reliable inputs for merchandising focus, retention investment, and fulfillment performance management.",
+          "Olist e-commerce data pipeline | DuckDB + dbt + Dagster",
+          "02"
+        ]
+      },
+      {
+        "slide": 3,
+        "text": [
+          "ARCHITECTURE",
+          "A layered ELT architecture keeps raw data auditable and analytics tables business-ready.",
+          "Raw files",
+          "Olist CSV / Excel",
+          "Ingestion",
+          "Python loaders",
+          "Warehouse",
+          "DuckDB raw schema",
+          "ELT",
+          "dbt staging and marts",
+          "Quality",
+          "dbt + SQL checks",
+          "Use cases",
+          "BI and Python analysis",
+          "Design principle: preserve source fidelity in raw tables, then apply business definitions once in dbt models.",
+          "Olist e-commerce data pipeline | DuckDB + dbt + Dagster",
+          "03"
+        ]
+      },
+      {
+        "slide": 4,
+        "text": [
+          "WAREHOUSE DESIGN",
+          "The star schema is optimized for sales, customer, product, seller, and time-based questions.",
+          "FactSales",
+          "orders, items, revenue, freight, delivery",
+          "DimCustomer",
+          "DimProduct",
+          "DimSeller",
+          "DimDate",
+          "Olist e-commerce data pipeline | DuckDB + dbt + Dagster",
+          "04"
+        ]
+      },
+      {
+        "slide": 5,
+        "text": [
+          "DATA QUALITY",
+          "Quality gates turn a public dataset into a trusted analytical product.",
+          "Completeness",
+          "Primary keys and critical facts cannot be null.",
+          "Uniqueness",
+          "Fact and dimension keys are checked for duplicates.",
+          "Integrity",
+          "Fact rows must resolve to customer and product dimensions.",
+          "Business logic",
+          "Amounts are non-negative; delivered orders have delivery timing.",
+          "Operational rule: failed quality checks stop analysis outputs and surface the failed test set.",
+          "Olist e-commerce data pipeline | DuckDB + dbt + Dagster",
+          "05"
+        ]
+      },
+      {
+        "slide": 6,
+        "text": [
+          "ANALYSIS",
+          "The analysis workflow answers three executive questions first.",
+          "When are we growing?",
+          "monthly revenue and order trends",
+          "What should we push?",
+          "top product categories by revenue",
+          "Who should we retain?",
+          "customer lifetime value segments",
+          "Olist e-commerce data pipeline | DuckDB + dbt + Dagster",
+          "06"
+        ]
+      },
+      {
+        "slide": 7,
+        "text": [
+          "RECOMMENDATIONS",
+          "The first operating moves are merchandising focus, retention targeting, and fulfillment control.",
+          "1",
+          "Merchandising",
+          "Use category revenue rankings to prioritize assortment, campaign inventory, and seller enablement.",
+          "2",
+          "Retention",
+          "Build lifecycle campaigns for loyal and high-value customers using customer lifetime value.",
+          "3",
+          "Operations",
+          "Track delivery days as an executive KPI because fulfillment performance protects repeat purchase behavior.",
+          "Olist e-commerce data pipeline | DuckDB + dbt + Dagster",
+          "07"
+        ]
+      },
+      {
+        "slide": 8,
+        "text": [
+          "RISK AND MITIGATION",
+          "The main risks are data freshness, definition drift, and production hardening.",
+          "Risk",
+          "Mitigation",
+          "Public dataset is historical",
+          "Design is portable; connect fresh operational exports or cloud object storage.",
+          "Metric definitions can drift",
+          "Centralize definitions in dbt models and tests, with reviewed pull requests.",
+          "Local DuckDB is not enterprise serving",
+          "Promote the same dbt models to BigQuery, Snowflake, or Postgres when scale demands.",
+          "Quality failures can block reporting",
+          "Fail fast, alert owners, and publish quality result tables for triage.",
+          "Olist e-commerce data pipeline | DuckDB + dbt + Dagster",
+          "08"
+        ]
+      }
+    ]
+  },
+  "nhl": {
+    "path": "C:\\Users\\mychu\\Downloads\\NHL Presentation-XYNOTZ (Final).pptx",
+    "slide_count": 31,
+    "media_count": 36,
+    "slides": [
+      {
+        "slide": 1,
+        "text": []
+      },
+      {
+        "slide": 2,
+        "text": [
+          "Presentation Agenda",
+          "Introduction/Objectives",
+          "ETL Process ",
+          "– ",
+          "MS Fabric, Ingestion/Validation/Cleaner, working with Pyspark environment",
+          "Machine Learning Model Experimentation ",
+          "– ",
+          "E",
+          "xploratory Data Analysis (EDA), Win/Loss Prediction using ",
+          "Logistic Regression, Decision Tree Classifier, Random Forest Classifier",
+          "Power BI Dashboard ",
+          "– Hockey Rink Heatmap via Scatter Plot for historical player event analysis"
+        ]
+      },
+      {
+        "slide": 3,
+        "text": [
+          "Introduction",
+          "Dataset Overview",
+          "NHL Game Data",
+          "Represents ",
+          "20 years ",
+          "of all the official metrics measured for each game in the NHL",
+          "Consists of ",
+          "13 tables in CSV format",
+          "Original tables",
+          "https://www.kaggle.com/datasets/martinellis/nhl-game-data"
+        ]
+      },
+      {
+        "slide": 4,
+        "text": [
+          "Project Objectives",
+          "Design and implement an end-to-end",
+          " ETL data pipeline",
+          ", including schema design ",
+          "Conduct ",
+          "functional testing and validation ",
+          "of the data at the silver layer",
+          "Perform ",
+          "preparation for ML modelling ",
+          "and ",
+          "data exploration ",
+          "at the gold layer",
+          "Develop an ",
+          "interactive BI dashboard ",
+          "for insights"
+        ]
+      },
+      {
+        "slide": 5,
+        "text": [
+          "Tech Stack Used for Workflow",
+          "Microsoft Fabric ",
+          "for end-to-end ETL pipeline",
+          "Employed ",
+          "medallion architecture ",
+          "to clean, filter, and enrich the raw data from NHL",
+          "Utilized Tools:",
+          "Lakehouse",
+          "ML Model/ Experiment",
+          "Power BI"
+        ]
+      },
+      {
+        "slide": 6,
+        "text": [
+          "NHL Dataset - Data Cleaner",
+          "Objective",
+          ":",
+          " Transform/Clean raw NHL datasets for analytics & ML pipelines",
+          "Supports ",
+          "dual processing",
+          ": Pandas & PySpark DataFrames",
+          "Ensures ",
+          "consistency, schema validation",
+          ", and ",
+          "usable datasets",
+          "Built as a ",
+          "modular, reusable data engineering component",
+          "Factory Method Design Architecture",
+          "Uses ",
+          "Factory Method ",
+          "design pattern",
+          "Single entry class manages multiple dataset cleaners",
+          "Each dataset has its own ",
+          "specialized cleaning logic",
+          "Scalable",
+          ": new cleaners can be added without modifying core system",
+          "Encourages ",
+          "maintainability",
+          " and ",
+          "separation of responsibilities"
+        ]
+      },
+      {
+        "slide": 7,
+        "text": [
+          "ETL: EXTRACT PHASE ",
+          "Automated NHL Data Ingestion & Validation",
+          "Notebook Responsibilities:",
+          "Download NHL datasets from Kaggle using Python",
+          "Move downloaded files from temporary folder to Files/downloaded (OneLake)",
+          "Data Validation & Processing:",
+          "Verify all files can be successfully read",
+          "Create both PySpark DataFrames and Pandas DataFrames",
+          "Perform record count checks to ensure files are readable and not empty",
+          "Automation:",
+          "Notebook executed via Microsoft Fabric Pipeline / Workspace",
+          "Scheduled to run daily at 10:30 AM",
+          "Outcome:",
+          "Fully automated, repeatable data ingestion, ensures up-to-date NHL data",
+          "Data ready for downstream cleaning, analytics, and ML pipelines"
+        ]
+      },
+      {
+        "slide": 8,
+        "text": [
+          "Sample Pipeline",
+          "Run History"
+        ]
+      },
+      {
+        "slide": 9,
+        "text": [
+          "ETL: TRANSFORM PHASE",
+          "Factory Method Flow Diagram",
+          "Request Service",
+          "Executor Notebook",
+          "- NHL Data Cleaner",
+          "Data Cleaning",
+          "Factory",
+          "Dataset Specific",
+          "Cleaner",
+          "Dataset Name",
+          "Specific Cleaner",
+          "Clean Service",
+          "Extract",
+          "Dataset",
+          "Transform/Clean",
+          "Dataset",
+          "Group 1 — Schema Standardization",
+          "Normalize column names → lowercase",
+          "Rename columns into snake_case",
+          "Align naming conventions across datasets",
+          "Remove redundant columns",
+          "Drop unused fields",
+          "Group 2 — Data Type Normalization",
+          "Convert IDs to Int64",
+          "Parse dates to datetime",
+          "Convert metrics to numeric",
+          "Convert booleans (W/L → True/False)",
+          "Enforce integer casting with assertions",
+          "Group 3 — Data Quality Validation",
+          "Primary key not null checks",
+          "Uniqueness checks",
+          "Duplicate removal",
+          "Business rule validation",
+          "Domain value validation",
+          "Sanity checks (negative values, invalid periods)",
+          "Group 4 — Missing Data Handling",
+          "Fill NULL numeric metrics with 0",
+          "Fill categorical unknowns with defaults",
+          "Mean imputation",
+          "Derived fields (shift duration)",
+          "Feature engineering flags",
+          "Business logic filtering",
+          "Load/Save",
+          "Cleaned Dataset",
+          "dbo(delta) & csv file"
+        ]
+      },
+      {
+        "slide": 10,
+        "text": [
+          "ETL Challenges & Workarounds",
+          "Unfamiliar with ",
+          "subject matter ",
+          "(hockey, NHL league) and use of its ",
+          "terminology",
+          " reflected in datasets",
+          "Notebooks run in ",
+          "Pyspark",
+          " environment; unfamiliar with Pyspark language difference and encountered errors when trying to load delta tables",
+          "Frequently encountered ",
+          "capacity limits ",
+          "in Fabric, preventing access to vital files",
+          "Team-wide initial clarification session",
+          " to ",
+          "manually determine pertinent information ",
+          "to retain/drop",
+          "Tables distributed evenly between team members for everyone to ",
+          "familiarize with new environment ",
+          "for learning purposes",
+          "Sought ",
+          "advice and assistance from instructor ",
+          "to swiftly resolve issues as they arise",
+          "PBI report/semantic model worked on offline"
+        ]
+      },
+      {
+        "slide": 11,
+        "text": [
+          "Schema Design",
+          "Dimension Tables:",
+          "game",
+          "game_plays",
+          "player_info",
+          "team_info",
+          "Fact Tables:",
+          "game_team_stats",
+          "game_skater_stats",
+          "game_goalie_stats",
+          "game_scratches",
+          "game_penalties",
+          "game_officials",
+          "game_plays_players",
+          "game_shifts"
+        ]
+      },
+      {
+        "slide": 12,
+        "text": [
+          "MACHINE LEARNING ",
+          "MODEL EXPERIMENTATION"
+        ]
+      },
+      {
+        "slide": 13,
+        "text": [
+          "Exploratory Data Analysis (EDA)",
+          "Win/Loss exploration",
+          "Win–loss distribution (overall win rate)",
+          "Win rate by Home vs Away",
+          "Win rate by Team (bar chart of all teams)",
+          "Win vs lose % stacked breakdown per Team",
+          "Feature relationships",
+          "Win rate ",
+          "Correlation heatmap for numeric features",
+          "Pairplot of key performance metrics colored by is_win (feature selection)",
+          "Average feature differences (wins vs losses) to rank",
+          " features by separation",
+          "Outcome",
+          "Identify candidate predictors of wins (metrics with large win vs loss mean differences)",
+          "Detect correlated features via correlation heatmap / pairplots ",
+          "Compare performance patterns by team and game context ",
+          "Next:",
+          "Build a baseline model to predict is_win, track accuracy, and automate evaluation with the daily refresh pipeline",
+          "Machine Learning Binary Classification Task: Predicting Win (1) vs. Loss (0)"
+        ]
+      },
+      {
+        "slide": 14,
+        "text": []
+      },
+      {
+        "slide": 15,
+        "text": [
+          "Machine Learning Workflow (NHL Win/Loss Prediction)",
+          "Data Ingestion",
+          "(Cleaned NHL Dataset)",
+          "Train/Test Split",
+          "(Stratified)",
+          "Feature Selection",
+          "Data Validation",
+          "Define Target",
+          "Is_win (1/0)",
+          "Preprocessing",
+          "Handle Missing",
+          "Encode Categorical",
+          "Scale Numerical",
+          "Evaluate Models",
+          "Accuracy, Precision, Racall",
+          "F1, Confusion Matrix",
+          "Train Multiple Models",
+          "LogReg/DT/RF/Others",
+          "Compare Results",
+          "Choose Best Model",
+          "Hyperparameter Tuning",
+          "GridSearchCV + CV",
+          "Final Model",
+          "Validate on Test set",
+          "Save & Report",
+          "Best param + metrics",
+          "Ready for deployment/pipeline"
+        ]
+      },
+      {
+        "slide": 16,
+        "text": [
+          "NHL Machine Learning ",
+          "Objective",
+          "Build model to ",
+          "predict NHL match outcomes",
+          " (Win / Loss)",
+          "Use ",
+          "historical game and team performance data",
+          "Compare multiple classification models using ",
+          "consistent evaluation metrics",
+          "Select the best-performing model for ",
+          "hyperparameter tuning",
+          "Dataset & Target Variable",
+          "Input data sourced from ",
+          "cleaned NHL datasets",
+          "Target variable: is_win",
+          "1 = Win, 0 = Loss",
+          "Features include ",
+          "team performance statistics ",
+          "and ",
+          "game context",
+          "Data prepared and Workflow"
+        ]
+      },
+      {
+        "slide": 17,
+        "text": [
+          "NHL Machine Learning ",
+          "Data Preparation & Preprocessing",
+          "Handled ",
+          "missing values ",
+          "and ",
+          "invalid records",
+          "Separated ",
+          "numerical and categorical ",
+          "features",
+          "Applied ",
+          "scaling",
+          " to numerical features",
+          "Encoded ",
+          "categorical variables ",
+          "using appropriate encoders",
+          "Ensured ",
+          "no data leakage ",
+          "between train and test sets",
+          "Train-Test Split Strategy",
+          "Dataset split into ",
+          "training",
+          " and ",
+          "testing sets ",
+          "(80/20)",
+          "Stratified split ",
+          "used to preserve Win/Loss distribution",
+          "Random seed fixed ",
+          "for reproducibility",
+          "Training data used only for ",
+          "model fitting and validation"
+        ]
+      },
+      {
+        "slide": 18,
+        "text": [
+          "NHL Machine Learning ",
+          "Models Trained",
+          "Logistic Regression ",
+          "(baseline linear model)",
+          "Decision Tree Classifier",
+          "Random Forest Classifier",
+          "Additional models evaluated for comparison",
+          "All models trained using the same preprocessing pipeline",
+          "Model Training Approach",
+          "Used ",
+          "Scikit-learn Pipelines ",
+          "for clean and repeatable workflows",
+          "Preprocessing",
+          " and ",
+          "model training",
+          " combined into a single pipeline",
+          "Ensured ",
+          "consistent feature handling",
+          " across all models",
+          "Improved ",
+          "maintainability",
+          " and ",
+          "reproducibility"
+        ]
+      },
+      {
+        "slide": 19,
+        "text": [
+          "NHL Machine Learning ",
+          "Evaluation Metrics",
+          "Accuracy",
+          " – overall correctness of predictions",
+          "Precision ",
+          "– correctness of predicted wins",
+          "Recall",
+          " – ability to detect actual wins",
+          "F1-score",
+          " – balance between precision and recall",
+          "Confusion Matrix ",
+          "– detailed error analysis",
+          "Model Comparison",
+          "Collected ",
+          "evaluation metrics ",
+          "for all trained models",
+          "Compared performance across ",
+          "accuracy, precision, recall, and F1-score",
+          "Identified ",
+          "strengths and weaknesses ",
+          "of each model",
+          "Selected the ",
+          "most suitable model",
+          " based on balanced performance"
+        ]
+      },
+      {
+        "slide": 20,
+        "text": [
+          "NHL Machine Learning ",
+          "Hyperparameter Tuning ",
+          "Perform ",
+          "Grid Search",
+          "Selected ",
+          "best-performing model ",
+          "from initial comparison",
+          "Applied ",
+          "GridSearchCV",
+          " for hyperparameter optimization",
+          "Used ",
+          "cross-validation ",
+          "to ensure robust performance (5 fold)",
+          "Optimized parameters ",
+          "to improve generalization",
+          "Final Model Selection",
+          "Best model selected based on ",
+          "cross-validated performance",
+          "Validated on ",
+          "unseen test dataset",
+          "Confirmed ",
+          "no overfitting or data leakage",
+          "Final Model: ",
+          "Decision Tree Classifier"
+        ]
+      },
+      {
+        "slide": 21,
+        "text": [
+          "The model achieved ",
+          "77.69% accuracy",
+          ", showing good performance in predicting NHL wins and losses.",
+          "Macro and weighted F1-scores (~0.777)",
+          " indicate balanced performance with no strong class bias.",
+          "The dataset is ",
+          "relatively balanced",
+          " (4,869 losses vs 4,618 wins), making accuracy a reliable metric.",
+          "Model Performance Overview"
+        ]
+      },
+      {
+        "slide": 22,
+        "text": [
+          "The model achieved a ",
+          "ROC-AUC of 0.87",
+          ", indicating good win/loss discrimination.",
+          "Training and validation curves ",
+          "converge",
+          ", showing minimal overfitting.",
+          "Validation performance ",
+          "stabilizes with more data",
+          ", indicating reliable generalization.",
+          "ROC & Learning Curve Summary"
+        ]
+      },
+      {
+        "slide": 23,
+        "text": [
+          "POWER BI ANALYSIS"
+        ]
+      },
+      {
+        "slide": 24,
+        "text": [
+          "Analysis: Heatmap for Hockey Event Types",
+          "Objective:",
+          "To construct an ",
+          "event heatmap visualization ",
+          "in Power BI using provided Kaggle datasets for NHL Hockey for the last ",
+          "5",
+          " seasons (2016/17 to 2019/20).",
+          "The resulting heatmap can be used to ",
+          "analyze player or team movement ",
+          "and ",
+          "location by specific events ",
+          "to gain insights for:",
+          "Coaching or training ",
+          "for a team’s players, or",
+          "To ",
+          "understand opposing teams strategy and players"
+        ]
+      },
+      {
+        "slide": 25,
+        "text": [
+          "Analysis: Heatmap for Hockey Event Types",
+          "Data required:",
+          "Events during a game – shots, goals, hits, penalties, etc ",
+          "Unique ",
+          "play id ",
+          "for each event (sequence, date/time) with associated ",
+          "player_id ",
+          "for each event",
+          "Cartesian location: ",
+          "rink centre as (0,0),  standardized left-right orientation (teams alternate sides every game period)",
+          "Improvise a heatmap using a scatter plot chart visual",
+          ", overlaid over rink image (100m x 85m)"
+        ]
+      },
+      {
+        "slide": 26,
+        "text": [
+          "Tables used for Heatmap Visualization",
+          "Dimension Tables:",
+          "game",
+          "game_plays",
+          "player_info",
+          "team_info",
+          "Fact Tables:",
+          "game_skater_stats",
+          "game_plays_players"
+        ]
+      },
+      {
+        "slide": 27,
+        "text": [
+          "Analysis: Heatmap for Hockey Event Types"
+        ]
+      },
+      {
+        "slide": 28,
+        "text": [
+          "Analysis: Heatmap for Hockey Event Types"
+        ]
+      },
+      {
+        "slide": 29,
+        "text": [
+          "Analysis: Case Study – Travis Konecny",
+          "Travis Konecny was a ",
+          "forward",
+          " for the ",
+          "Philly Flyers ",
+          "from 2016/17 season",
+          "Average ",
+          "24 goals",
+          " per season for 2016/17 to 2019/20",
+          "Average ",
+          "13 goals",
+          " for 2020/21 and 2021/22 (declined 45%)",
+          "Agreed to work with data analytics to improve. Used his past performance for this period as the basis for improvement.",
+          "Among other things, data showed that he took ",
+          "too many perimeter shots",
+          ".",
+          "He adjusted his game accordingly and goal conversion rate doubled dramatically from ",
+          "7.3%",
+          " to ",
+          "16.2%",
+          " between the 2021/22 and 2022/23 seasons."
+        ]
+      },
+      {
+        "slide": 30,
+        "text": [
+          "Analysis: Case Study – Travis Konecny",
+          "Konecny’s goal conversion rate improvement"
+        ]
+      },
+      {
+        "slide": 31,
+        "text": [
+          "THANK YOU ",
+          "",
+          "+",
+          "Q&A"
+        ]
+      }
+    ]
+  }
+}
